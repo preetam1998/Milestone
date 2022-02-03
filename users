@@ -1,0 +1,53 @@
+
+
+
+{
+    "userName" : "pradeep1010",
+    "firstName" : "pradeep",
+    "lastName" : "singh",
+    "email" : "pradeep.singh@paytmbank.com",
+    "mobile" : "1223334444",
+    "currentAddress" : "jalandhar",
+    "permanentAddress" : "shimla"
+}
+
+
+{
+    "userName" : "preetam1998",
+    "firstName" : "preetam",
+    "lastName" : "patel",
+    "email" : "preetam.patel@paytmbank.com",
+    "mobile" : "9685532139",
+    "currentAddress" : "jabalpur",
+    "permanentAddress" : "bhopal"
+}
+
+{
+    "userName" : "simram0001",
+    "firstName" : "simran",
+    "lastName" : "patel",
+    "email" : "simran.patel@paytmbank.com",
+    "mobile" : "7777744444",
+    "currentAddress" : "shimla",
+    "permanentAddress" : "chennai"
+}
+
+{
+    "userName" : "aarya27",
+    "firstName" : "aarya",
+    "lastName" : "dubey",
+    "email" : "aarya.dubey@paytmbank.com",
+    "mobile" : "7474747474",
+    "currentAddress" : "shimla",
+    "permanentAddress" : "chennai"
+}
+
+{
+    "userName" : "simram0001",
+    "firstName" : "simran",
+    "lastName" : "patel",
+    "email" : "simran.patel@paytmbank.com",
+    "mobile" : "7777744444",
+    "currentAddress" : "shimla",
+    "permanentAddress" : "chennai"
+}
