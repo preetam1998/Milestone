@@ -1,26 +1,30 @@
 package com.example.second.service;
 
-import org.springframework.security.core.userdetails.User;
+import com.example.second.dao.UserRepo;
+import com.example.second.models.MyUserDetails;
+import com.example.second.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+    @Autowired
+    private UserRepo userRepo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-       // System.out.println(username + "check1");
-        if(username.equals("Milestone"))
+        User user = userRepo.findByUserName(username);
+        if(user != null)
         {
-            //System.out.println(username + "check2");
-            return new User("Milestone","1000", new ArrayList<>());
-        }else
+            UserDetails userDetails = new MyUserDetails(user);
+            return userDetails;
+        }
+        else
         {
             throw new UsernameNotFoundException("User not found !");
         }

@@ -47,14 +47,13 @@ public class JwtController {
     public @ResponseBody String createAuthenticationToken(@RequestBody JwtRequest requestDto){
 
 
-        System.out.println(requestDto.getUsername() + "Controller 1");
+
         // Create Response
         Response response = new Response();
 
         try{
-            System.out.println(requestDto.getPassword() + "check1");
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(requestDto.getUsername(),requestDto.getPassword())
+                    new UsernamePasswordAuthenticationToken(requestDto.getUsername(), requestDto.getPassword())
             );
         }catch(BadCredentialsException ex){
 
@@ -63,10 +62,9 @@ public class JwtController {
             response.setData("No Token Generated");
             return response.getData();
         }
-        System.out.println(requestDto.getPassword() + "check4");
+
         UserDetails userDetails = userDetailsService.loadUserByUsername(requestDto.getUsername());
         String jwt = jwtUtil.generateToken(userDetails);
-        System.out.println(requestDto.getPassword() + "check40");
 
         // On EveryThing Fine
         response.setData("Token :"  + jwt);
