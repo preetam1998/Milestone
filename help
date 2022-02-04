@@ -1,0 +1,103 @@
+// Users
+
+{
+    "firstName" : "Preetam",
+    "lastName" : "patel",
+    "password" : "preetam1998",
+    "mobileNumber" : "9685532139",
+    "email" : "preet.patel@paytmbank.com"
+}
+
+
+{
+    "firstName" : "Roshni",
+    "lastName" : "Patel",
+    "password" : "raj1000",
+    "mobileNumber" : "1239874646",
+    "email" : "roshni.raj@paytmbank.com"
+}
+
+
+
+{
+    "firstName" : "mukesh",
+    "lastName" : "kumar",
+    "password" : "mukesh1111",
+    "mobileNumber" : "7474338862",
+    "email" : "mukesh.kumar@paytmbank.com"
+}
+
+{
+    "firstName" : "Ashu",
+    "lastName" : "Aman",
+    "password" : "ashu0001",
+    "mobileNumber" : "1238888646",
+    "email" : "ashu.aman@paytmbank.com"
+}
+
+
+{
+    "firstName" : "Suraj",
+    "lastName" : "Singh",
+    "password" : "suraj0001",
+    "mobileNumber" : "9685444439",
+    "email" : "suraj.singh@paytmbank.com"
+}
+
+
+// Wallet Users
+
+
+{
+	"mobileNumber" : "9685532139",
+	"amt" : "40000" 
+}
+
+
+{
+	"mobileNumber" : "1239874646",
+	"amt" : "90000" 
+}
+
+
+
+{
+	"mobileNumber" : "7474338862",
+	"amt" : "12000" 
+}
+
+{
+	"mobileNumber" : "1238888646",
+	"amt" : "99000" 
+}
+
+{
+	"mobileNumber" : "9685444439",
+	"amt" : "10000" 
+}
+
+
+
+
+// Dependency
+<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+</dependency>
+
+
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+
+		<dependency>
+        			<groupId>org.springframework.boot</groupId>
+        			<artifactId>spring-boot-starter-test</artifactId>
+        			<scope>test</scope>
+        		</dependency>
+
+
+        		eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNaWxlc3RvbmUiLCJleHAiOjE2NDM5NDQ5NDIsImlhdCI6MTY0MzkwODk0Mn0.DrQNlj55UMIzUeL2ILfMubJTCZPdNlxHvnNDm3zyijo
