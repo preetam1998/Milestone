@@ -1,13 +1,14 @@
 package com.example.second.models;
 
 import lombok.*;
+
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @ToString
-@Data
 @Builder
 @Entity
 public class User extends Timestamps {
@@ -21,6 +22,7 @@ public class User extends Timestamps {
 
 	@Column(nullable = false)
 	private String firstName;
+
 	private String lastName;
 
 	@Column(nullable = false)
@@ -38,13 +40,13 @@ public class User extends Timestamps {
 	private String pAddress;
 
 	@Column(nullable = false)
-	private boolean active;
+	private boolean isActive;
 
 	@Column(nullable = false)
 	private String roles;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="wallet_id", referencedColumnName = "id")
-	private UserWallet wallet;
+//	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinColumn(name="wallet_id", referencedColumnName = "id")
+//	private UserWallet wallet;
 
 }

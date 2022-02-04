@@ -1,81 +1,116 @@
 // Users
-
+1.
 {
+    "userName" : "preetam0001"
     "firstName" : "Preetam",
     "lastName" : "patel",
     "password" : "preetam1998",
     "mobileNumber" : "9685532139",
-    "email" : "preet.patel@paytmbank.com"
+    "email" : "preet.patel@paytmbank.com",
+   "cAddress":"Nehru  Nagar, Bhopal",
+    "pAddress" : "Gwari Ghat, Bhopal"
 }
 
+2.
 
 {
+    "userName" : "roshni0002",
     "firstName" : "Roshni",
     "lastName" : "Patel",
     "password" : "raj1000",
-    "mobileNumber" : "1239874646",
+    "mobileNumber" : "2222222222",
     "email" : "roshni.raj@paytmbank.com"
+    "cAddress":"Nehru  Nagar, Bhopal",
+    "pAddress" : "Gwari Ghat, Bhopal"
 }
 
 
-
+3.
 {
+    "userName" : "mukesh0003",
     "firstName" : "mukesh",
     "lastName" : "kumar",
     "password" : "mukesh1111",
-    "mobileNumber" : "7474338862",
+    "mobileNumber" : "3333333333",
     "email" : "mukesh.kumar@paytmbank.com"
+    "cAddress":"Nehru  Nagar, Bhopal",
+    "pAddress" : "Gwari Ghat, Bhopal"
 }
 
+
+4.
 {
+
+    "userName" : "ashu0004",
     "firstName" : "Ashu",
     "lastName" : "Aman",
     "password" : "ashu0001",
-    "mobileNumber" : "1238888646",
-    "email" : "ashu.aman@paytmbank.com"
+    "mobileNumber" : "4444444444",
+    "email" : "ashu.aman@paytmbank.com",
+    "cAddress":"Nehru  Nagar, Bhopal",
+    "pAddress" : "Gwari Ghat, Bhopal"
 }
 
 
+5.
 {
+"userName" : "suraj0005",
     "firstName" : "Suraj",
     "lastName" : "Singh",
     "password" : "suraj0001",
-    "mobileNumber" : "9685444439",
+    "mobileNumber" : "5555555555",
     "email" : "suraj.singh@paytmbank.com"
+    "cAddress":"Nehru  Nagar, Bhopal",
+    "pAddress" : "Gwari Ghat, Bhopal"
 }
 
+6.
+{
+    "userName" : "shiv0006",
+    "firstName" : "Shivam",
+    "lastName" : "Singh",
+    "password" : "shiv@123",
+    "mobileNumber" : "66666666666",
+    "email" : "shivam.singh@paytmbank.com",
+    "cAddress":"Vijay Nagar, Jabalpur",
+    "pAddress" : "Akash Vhar, Bhopal"
+}
 
 // Wallet Users
 
 
 {
 	"mobileNumber" : "9685532139",
-	"amt" : "40000" 
+	"amt" : "90000"
 }
 
 
 {
-	"mobileNumber" : "1239874646",
-	"amt" : "90000" 
+	"mobileNumber" : "2222222222",
+	"amt" : "56000"
 }
 
 
 
 {
-	"mobileNumber" : "7474338862",
+	"mobileNumber" : "3333333333",
 	"amt" : "12000" 
 }
 
 {
-	"mobileNumber" : "1238888646",
-	"amt" : "99000" 
+	"mobileNumber" : "4444444444",
+	"amount" : "99000"
 }
 
 {
-	"mobileNumber" : "9685444439",
-	"amt" : "10000" 
+	"mobileNumber" : "5555555555",
+	"amount" : "10000"
 }
 
+{
+	"mobileNumber" : "6666666666",
+	"amt" : "8000"
+}
 
 
 

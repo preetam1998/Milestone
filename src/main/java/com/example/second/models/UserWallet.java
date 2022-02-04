@@ -1,37 +1,33 @@
 package com.example.second.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-@Data
+@Getter@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
-public class UserWallet {
+public class UserWallet extends Timestamps{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
-    @JsonIgnore
-    @OneToOne(mappedBy = "wallet", fetch = FetchType.LAZY)
-    private User user;
-
+    private String mobileNumber;
     private double amount;
-
     private boolean isActive;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "payer")
-    private List<Transaction> payerTransaction;
 
+//    @JsonIgnore
+//    @OneToOne(mappedBy = "wallet", fetch = FetchType.LAZY)
+//    private User user;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "payee")
-    private List<Transaction>payeeTransaction;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "payer")
+//    private List<Transaction> payerTransaction;
+//
+//
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "payee")
+//    private List<Transaction>payeeTransaction;
 }

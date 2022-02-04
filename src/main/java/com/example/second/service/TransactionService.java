@@ -22,18 +22,23 @@ public class TransactionService {
 	
 	public Transaction sendMoney(String payerM, String payeeM, double amt)
 	{
+		System.out.println(payeeM);
+		System.out.println(payerM);
+		System.out.println(amt);
+
 		// Do both payer and payee have wallet
-		UserWallet payerWallet = walletRepo.findByUserMobileNumber(payerM);
+		UserWallet payerWallet = walletRepo.findByMobileNumber(payerM);
 		if(payerWallet == null)
 			throw new WalletNotFoundException(payerM);
-		UserWallet payeeWallet = walletRepo.findByUserMobileNumber(payeeM);
+		UserWallet payeeWallet = walletRepo.findByMobileNumber(payeeM);
 		if(payeeWallet == null)
 			throw new WalletNotFoundException(payeeM);
 
 		// do transaction
 		Transaction transaction = new Transaction();
-		transaction.setPayee(payerWallet);
-		transaction.setPayee(payeeWallet);
+		transaction.setAmount(amt);
+		transaction.setPayer(payerWallet.getMobileNumber());
+		transaction.setPayee(payeeWallet.getMobileNumber());
 		transaction.setStatus(TransactionStatus.PENDING);
 		transactionRepo.save(transaction);
 
@@ -51,19 +56,22 @@ public class TransactionService {
 		walletRepo.save(payeeWallet);
 
 		// Make transaction Successful
-		transaction.setPayerBalance(payerWallet.getAmount());
-		transaction.setPayeeBalance(payeeWallet.getAmount());
 		transaction.setStatus(TransactionStatus.SUCCESS);
+
 		return transactionRepo.save(transaction);
-
-
 	}
-	
-	
-	public TransactionStatus getStatus(long id)
+
+
+	public Iterable<Transaction> getTransactionHistory(String mobileNumber)
 	{
-		Transaction t = transactionRepo.findById(id);
-		return  t.getStatus();
+		Iterable<Transaction> transactions = transactionRepo.findByMobileNumber(mobileNumber);
+		for(Transaction transaction : transactions)
+		{
+			System.out.println(transaction);
+		}
+		return transactions;
 	}
+	
+
 	
 }

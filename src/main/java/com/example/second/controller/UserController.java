@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	
-	@GetMapping("/user")
+
+
+
+	@GetMapping("/all")
 	public Response getAllUser()
 	{
 		// Fetch All Users from DB
@@ -38,7 +41,7 @@ public class UserController {
 		return response;
 	}
 	
-	@GetMapping("/user/{mobileNumber}")
+	@GetMapping("/{mobileNumber}")
 	public Response getUser(@PathVariable String mobileNumber )
 	{
 		//Fetching User Using Mobile Number
@@ -59,8 +62,9 @@ public class UserController {
 		}
 		return response;
 	}
+
 	
-	@PostMapping("/user")
+	@PostMapping("/addNewUser")
 	public Response createUser(@RequestBody UserSideResponse user)
 	{
 		// Adding New User in to  DB
@@ -84,10 +88,12 @@ public class UserController {
 		
 	}
 	
-	@PutMapping("/user")
+	@PutMapping("/{userName}")
 	public Response updateUser(@PathVariable String userName, @RequestBody UserSideResponse user)
 	{
 		// Updating User in to  DB
+		System.out.println(user );
+		System.out.println("user" );
 		User userUpdate = this.userService.updateUser(userName, user);
 
 		//Create Response
@@ -107,7 +113,7 @@ public class UserController {
 	}
 	
 	
-	@DeleteMapping("user/{mobileNumber}")
+	@DeleteMapping("/{mobileNumber}")
 	public Response deleteUser(@PathVariable String mobileNumber)
 	{
 

@@ -1,19 +1,18 @@
 package com.example.second.service;
 
 import com.example.second.config.Validations;
+import com.example.second.dao.UserRepo;
 import com.example.second.dao.WalletRepo;
 import com.example.second.exception.UserNotFoundException;
 import com.example.second.exception.UserValidationException;
 import com.example.second.models.User;
+import com.example.second.models.UserSideResponse;
 import com.example.second.models.UserWallet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.second.dao.UserRepo;
-import com.example.second.models.UserSideResponse;
-
-import java.util.List;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -36,6 +35,7 @@ public class UserService {
 
 	public List<User> getAllUser()
 	{
+		//
 		return this.userRepo.findAll();
 	}
 	
@@ -76,8 +76,8 @@ public class UserService {
 			u1.setRoles("USER");
 
 			// Check the Wallet with  Number
-			UserWallet w1 = walletRepo.findByUserMobileNumber(user.getMobileNumber());
-			if (w1 != null)
+			UserWallet myWallet = walletRepo.findByMobileNumber(user.getMobileNumber());
+			if (myWallet != null)
 				u1.setActive(true);
 			else
 				u1.setActive(false);
@@ -92,30 +92,30 @@ public class UserService {
 
 		// Check weather user is present of not??/
 		User uPresent = userRepo.findByUserName(username);
-
+		System.out.println(uPresent);
 		if(uPresent == null)
-				throw new UserNotFoundException();
+				throw new UserNotFoundException(user.getMobileNumber());
 
 		else
 		{
 			// Validation
 			boolean userFlag = this.userValidationException.checkUserUpdateValidation(user);
 
-			User u1 = new User();
+
 			if (userFlag) {
 				// Add details
-				u1.setUserName(user.getUserName());
-				u1.setPassword(user.getPassword());
-				u1.setFirstName(user.getFirstName());
-				u1.setLastName(user.getLastName());
-				u1.setEmail(user.getEmail());
-				u1.setMobileNumber(user.getMobileNumber());
-				u1.setCAddress(user.getcAddress());
-				u1.setPAddress(user.getpAddress());
+				uPresent.setUserName(user.getUserName());
+				uPresent.setPassword(user.getPassword());
+				uPresent.setFirstName(user.getFirstName());
+				uPresent.setLastName(user.getLastName());
+				uPresent.setEmail(user.getEmail());
+				uPresent.setMobileNumber(user.getMobileNumber());
+				uPresent.setCAddress(user.getcAddress());
+				uPresent.setPAddress(user.getpAddress());
 
-				userRepo.save(u1);
+				userRepo.save(uPresent);
 			}
-			return u1;
+			return uPresent;
 		}
 	}
 
@@ -131,7 +131,7 @@ public class UserService {
 				userRepo.delete(u1);
 		}
 		else
-			throw new UserNotFoundException();
+			throw new UserNotFoundException(mobile);
 
 		return true;
 	}

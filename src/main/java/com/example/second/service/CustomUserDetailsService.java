@@ -15,10 +15,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        System.out.println(username + "check1");
+       // System.out.println(username + "check1");
         if(username.equals("Milestone"))
         {
-            System.out.println(username + "check2");
+            //System.out.println(username + "check2");
             return new User("Milestone","1000", new ArrayList<>());
         }else
         {
