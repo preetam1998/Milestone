@@ -46,8 +46,8 @@ public class WalletController {
 	}
 	
 	@PutMapping("/add-balance/{mobile}")
-	public Response addAmtToWallet(@PathVariable String mobile, @RequestBody WalletRequestDto walletRequest) throws Exception {
-
+	public Response addAmtToWallet(@PathVariable String mobile, @RequestBody WalletRequestDto walletRequest) throws Exception
+	{
 		boolean flag = this.wService.addMoneyToWallet(mobile, walletRequest.getAmount());
 		//Create Response
 		Response response = new Response();

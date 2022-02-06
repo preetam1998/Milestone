@@ -3,14 +3,13 @@ package com.example.second.controller;
 import com.example.second.models.User;
 import com.example.second.models.UserSideResponse;
 import com.example.second.service.UserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -21,19 +20,17 @@ import java.util.List;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ComponentScan("CustomUserDetailsService.class")
-@AutoConfigureMockMvc
-@WebMvcTest(UserControllerTest.class)
+@ExtendWith(MockitoExtension.class)
 class UserControllerTest {
 
     @Autowired
     MockMvc mockMvc;
 
-    @MockBean
+    @Mock
     private UserService userService;
 
-    @Autowired
-    ObjectMapper objectMapper;
+    @InjectMocks
+    private UserController userController;
 
     User u1 = new User(1,"preetam12","preetam","patel", "pre19", "9898989898", "preetam@g.c", "asdjnakca", "bdjhabd",true, "USER");
     User u2 = new User(2,"shiv01","shivam","patel", "pre19", "8898989898", "shiv@g.c", "asdjnakca", "bdjhabd",true, "USER");
@@ -77,7 +74,7 @@ class UserControllerTest {
 
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("user/addNewUser")
+                        .post("/user/addNewUser")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isCreated()
@@ -112,7 +109,7 @@ class UserControllerTest {
         Mockito.when(userService.deleteUser(u1.getMobileNumber())).thenReturn(true);
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("user/9898989898")
+                        .post("/user/9898989898")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk()
