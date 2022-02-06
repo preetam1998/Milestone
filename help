@@ -136,3 +136,42 @@
 
 
         		eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNaWxlc3RvbmUiLCJleHAiOjE2NDM5NDQ5NDIsImlhdCI6MTY0MzkwODk0Mn0.DrQNlj55UMIzUeL2ILfMubJTCZPdNlxHvnNDm3zyijo
+
+        		<dependency>
+                			<groupId>org.junit.vintage</groupId>
+                			<artifactId>junit-vintage-engine</artifactId>
+                			<scope>test</scope>
+                			<exclusions>
+                				<exclusion>
+                					<groupId>org.hamcrest</groupId>
+                					<artifactId>hamcrest-core</artifactId>
+                				</exclusion>
+                			</exclusions>
+                		</dependency>
+
+
+                		getUser
+                		User u1 = new User(1,"preetam12","preetam","patel", "pre19", "9898989898", "preetam@g.c", "asdjnakca", "bdjhabd",true, "USER");
+                                String mobile  = "9898989898";
+
+                                Mockito.when(userService.getSpecificUser(mobile)).thenReturn(u1);
+
+                                mockMvc.perform(MockMvcRequestBuilders
+                                        .get("/user/9898989898")
+                                        .contentType(MediaType.APPLICATION_JSON))
+                                        .andDo(print())
+                                        .andExpect(status().isOk());
+
+                        createUser
+                         UserSideResponse userSideResponse = new UserSideResponse("preetam12", "preetam", "aptel", "pre19", "9898989898", "preetam@g.c", "asdjnakca", "bdjhabd");
+                                User u1 = new User(1,"preetam12","preetam","patel", "pre19", "9898989898", "preetam@g.c", "asdjnakca", "bdjhabd",true, "USER");
+
+                                Mockito.when(userService.addNewUser(userSideResponse)).thenReturn(u1);
+
+
+                                mockMvc.perform(MockMvcRequestBuilders
+                                                .post("user/addNewUser")
+                                                .contentType(MediaType.APPLICATION_JSON))
+                                        .andDo(print())
+                                        .andExpect(status().isCreated()
+                                        );

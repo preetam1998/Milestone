@@ -1,32 +1,33 @@
 package com.example.second.dto;
 
-import com.example.second.enums.TransactionType;
 import com.example.second.enums.TransactionStatus;
 import com.example.second.models.Transaction;
-import lombok.Data;
-
-import java.util.Date;
+import lombok.*;
 
 
-@Data
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+
 public class TransactionResponseDto {
 
-    private int transactionId;
-    private TransactionStatus status;
-    private TransactionType type;
-    private int userWalletId;
+
     private double amount;
-    private double totalBalance;
-    private Date createTime;
-    private  Date updateTime;
+    private String payer;
+    private String payee;
+    private TransactionStatus status;
 
 
-    public TransactionResponseDto(Transaction transaction, int userWalletId)
+
+    public TransactionResponseDto(Transaction transaction)
     {
         this.status = transaction.getStatus();
-        this.createTime = transaction.getCreateTime();
-        this.updateTime = transaction.getUpdateTime();
-    }
+        this.amount = transaction.getAmount();
+        this.payee = transaction.getPayee();
+        this.payer = transaction.getPayer();
 
+    }
 
 }

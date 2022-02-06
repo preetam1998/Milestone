@@ -9,6 +9,8 @@ import com.example.second.models.UserWallet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TransactionService {
 
@@ -62,13 +64,11 @@ public class TransactionService {
 	}
 
 
-	public Iterable<Transaction> getTransactionHistory(String mobileNumber)
+	public List<Transaction> getTransactionHistory(String mobileNumber)
 	{
-		Iterable<Transaction> transactions = transactionRepo.findByMobileNumber(mobileNumber);
-		for(Transaction transaction : transactions)
-		{
-			System.out.println(transaction);
-		}
+
+		List<Transaction> transactions = transactionRepo.findByMobileNumber(mobileNumber);
+
 		return transactions;
 	}
 	

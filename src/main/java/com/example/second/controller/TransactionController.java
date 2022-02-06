@@ -21,7 +21,6 @@ public class TransactionController {
 	@PostMapping("/transfer")
 	public Response sendMoney(@RequestBody TransactionRequestDto transaction)
 	{
-
 		Transaction transactionResponse = this.transactionService.sendMoney(transaction.getPayerMobile(), transaction.getPayeeMobile(), transaction.getAmount());
 		Response response = new Response();
 		response.setStatus(HttpStatus.OK);
@@ -29,6 +28,8 @@ public class TransactionController {
 		response.setData(transactionResponse.toString());
 		return response;
 	}
+
+
 	@GetMapping("/transaction-history/{mobileNumber}")
 	public Response getTransactionHistory(@PathVariable String mobileNumber)
 	{
