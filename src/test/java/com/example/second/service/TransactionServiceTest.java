@@ -5,15 +5,25 @@ import com.example.second.dto.TransactionRequestDto;
 import com.example.second.enums.TransactionStatus;
 import com.example.second.models.Transaction;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.ArgumentMatchers;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.when;
+
+
+@SpringBootTest
 class TransactionServiceTest {
 
-    @Mock
+    @MockBean
     private TransactionRepo transactionRepo;
 
-    @InjectMocks
+    @Autowired
     private TransactionService transactionService;
 
     // Request Dto for transaction
@@ -24,29 +34,42 @@ class TransactionServiceTest {
     // Response Dto for transaction
     Transaction transaction1 = new Transaction(1, 200000.0, TransactionStatus.SUCCESS,    "111111111111", "4444444444" );
 
-//
-//    @BeforeEach
-//    public void setUp() {
-//        productList = new ArrayList<>();
-//        product1 = new Product(1, "bread",20);
-//        product2 = new Product(2, "jam",200);
-//        productList.add(product1);
-//        productList.add(product2);
-//    }
-//    @AfterEach
-//    public void tearDown() {
-//        product1 = product2 = null;
-//        productList = null;
-//    }
+
 
     @Test
     void sendMoney() {
 
-        transactionRepo.save(transaction1);
+        // Request Data
+        TransactionRequestDto req = new TransactionRequestDto();
+        req.setPayerMobile("9685532139");
+        req.setPayeeMobile("6666666666");
+        req.setAmount(8000.0);
 
+        // response Data
+        Transaction res = new Transaction();
+        res.setId(1);
+        res.setPayer(req.getPayerMobile());
+        res.setPayee(req.getPayeeMobile());
+        res.setStatus(TransactionStatus.SUCCESS);
+        res.setAmount(8000.0);
+
+        when(transactionRepo.save(ArgumentMatchers.any(Transaction.class))).thenReturn(res);
+
+        Transaction created = transactionService.sendMoney(req.getPayerMobile(), req.getPayeeMobile(), req.getAmount());
+        assertThat(created.getAmount()).isSameAs(8000.0);
     }
 
     @Test
     void getTransactionHistory() {
+        String mobile = "4444444444";
+
+        List<Transaction> res = new ArrayList<>();
+        when(transactionRepo.findByMobileNumber(mobile)).thenReturn(res);
+
+        List<Transaction> result = transactionService.getTransactionHistory(mobile);
+
+        assertThat(res.size()).isEqualTo(result.size() );
+
+
     }
 }

@@ -121,7 +121,7 @@ class UserControllerTest {
 
         // Get Token
         String token = getToken();
-        
+
         mockMvc.perform(MockMvcRequestBuilders
                         .delete("/user/9999999999")
                         .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)

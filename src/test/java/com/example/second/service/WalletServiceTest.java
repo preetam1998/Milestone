@@ -1,36 +1,35 @@
 package com.example.second.service;
 
 import com.example.second.dao.WalletRepo;
+import com.example.second.dto.WalletRequestDto;
 import com.example.second.models.UserWallet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.when;
 
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class WalletServiceTest {
 
-    @Mock
+    @MockBean
     private WalletRepo walletRepo;
 
     @Autowired
-    @InjectMocks
     private WalletService walletService;
 
-    private List<UserWallet> userWalletList;
-    private UserWallet userWallet1;
-    private UserWallet userWallet2;
+    List<UserWallet> userWalletList;
+    UserWallet userWallet1;
+    UserWallet userWallet2;
 
     @BeforeEach
     public void setUp() {
@@ -50,16 +49,28 @@ class WalletServiceTest {
     @Test
     void getWallet() throws Exception {
 
-        Mockito.when(walletRepo.findByMobileNumber("1234567890")).thenReturn(userWallet1);
-
+        when(walletRepo.findByMobileNumber("1234567890")).thenReturn(userWallet1);
         assertThat(walletService.getWallet(userWallet1.getMobileNumber())).isEqualTo(userWallet1);
+
     }
 
-    @Test
-    void createWallet() {
-    }
 
     @Test
-    void addMoneyToWallet() {
+    void createWallet() throws Exception {
+
+        WalletRequestDto req = new WalletRequestDto();
+        req.setMobileNumber("9999999999");
+        req.setAmount(23000.90);
+
+        UserWallet res = new UserWallet();
+        res.setMobileNumber("9999999999");
+        res.setAmount(23000.90);
+        res.setActive(true);
+
+        when(walletRepo.save(ArgumentMatchers.any(UserWallet.class))).thenReturn(res);
+
+        UserWallet created = walletService.createWallet(req);
+        assertThat(created.getMobileNumber()).isSameAs(res.getMobileNumber());
+
     }
 }
