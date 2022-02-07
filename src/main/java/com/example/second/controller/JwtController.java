@@ -50,19 +50,20 @@ public class JwtController {
 
         // Create Response
         Response response = new Response();
-
+        System.out.println("sdcscs1");
         try{
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(requestDto.getUsername(), requestDto.getPassword())
+
             );
         }catch(BadCredentialsException ex){
-
+            System.out.println("sdcscs2");
             response.setStatus(HttpStatus.BAD_REQUEST);
             response.setMessage("invalid username or password");
-            response.setData("No Token Generated");
+            response.setData("No 56Token Generated");
             return response.getData();
         }
-
+        System.out.println("sdcscs3");
         UserDetails userDetails = userDetailsService.loadUserByUsername(requestDto.getUsername());
         String jwt = jwtUtil.generateToken(userDetails);
 
@@ -70,7 +71,6 @@ public class JwtController {
         response.setData("Token :"  + jwt);
         response.setMessage("Token Generated");
         response.setStatus(HttpStatus.CREATED);
-        System.out.println(response);
         return response.getData();
     }
 }

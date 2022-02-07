@@ -23,6 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if(user != null)
         {
             UserDetails userDetails = new MyUserDetails(user);
+            System.out.println(userDetails.toString());
             return userDetails;
         }
         else

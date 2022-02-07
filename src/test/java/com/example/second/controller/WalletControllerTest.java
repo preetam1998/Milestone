@@ -1,29 +1,32 @@
 package com.example.second.controller;
 
-import com.example.second.dto.WalletRequestDto;
-import com.example.second.models.UserWallet;
+import com.example.second.dto.JwtRequest;
 import com.example.second.service.WalletService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class WalletControllerTest {
 
     @Autowired
@@ -35,62 +38,81 @@ class WalletControllerTest {
     @InjectMocks
     private WalletController walletController;
 
+    @Autowired
+    ObjectMapper objectMapper;
 
 
-    private UserWallet userWallet1 ;
-    private WalletRequestDto walletRequestDto;
-    List<UserWallet> userWallets;
-    @BeforeEach
-    public void setUp() {
-        userWallets = new ArrayList<>();
-        userWallet1 = new UserWallet("1212121212", 1234.90,true);
-        walletRequestDto = new WalletRequestDto("1212121212", 1234.90);
+    public String getToken() throws Exception {
+        String username = "aman0008";
+        String password = "Sen@123";
+        JwtRequest user = new JwtRequest(username, password);
 
-        userWallets.add(userWallet1);
+        String requestJSON = objectMapper.writeValueAsString(user);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(walletController).build();
-    }
-    @AfterEach
-    public void tearDown() {
-        userWallet1  = null;
-        userWallets = null;
-        walletRequestDto = null;
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/authenticate")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(requestJSON))
+                .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+
+        String response = result.getResponse().getContentAsString();
+        assertNotNull(response);
+        System.out.println(response );
+        String getResponse = response.toString();
+        String token = getResponse.substring(7);
+        return token;
     }
 
     @Test
     void getWallet() throws Exception {
 
-        when(walletService.getWallet(userWallet1.getMobileNumber())).thenReturn(userWallet1);
+        // Get Token
+        String token=getToken();
 
+        MvcResult result2 = mockMvc.perform(MockMvcRequestBuilders.get("/wallet/fetch-wallet/8888888888")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                .content(MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isOk()).andReturn();
 
-        mockMvc.perform(MockMvcRequestBuilders
-                        .get("/wallet/fetch-wallet/1212121212")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
+        assertNotNull(result2);
     }
 
     @Test
     void createWallet() throws Exception {
 
-        when(walletService.createWallet(walletRequestDto)).thenReturn(userWallet1);
+        // Get Token
+        String token=getToken();
 
-        mockMvc.perform(MockMvcRequestBuilders
+        // Fetch Data From Json File
+        String path = "src/test/jsonFile/Create_Wallet.json";
+        String jsonBody = new String(Files.readAllBytes(Paths.get(path)));
+
+        MvcResult result = (MvcResult) mockMvc.perform(MockMvcRequestBuilders
                         .post("/wallet/create-wallet")
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                        .content(jsonBody)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isCreated());
+                        .andExpect(status().isOk()).andReturn();
     }
 
     @Test
     void addAmtToWallet() throws Exception {
 
-        when(walletService.addMoneyToWallet(userWallet1.getMobileNumber(), walletRequestDto.getAmount())).thenReturn(true);
+        // Get Token
+        String token=getToken();
 
-        mockMvc.perform(MockMvcRequestBuilders
-                        .put("/wallet/add-balance/1212121212")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
+        // Fetch Data From Json File
+        String path = "src/test/jsonFile/Create_Wallet.json";
+        String jsonBody = new String(Files.readAllBytes(Paths.get(path)));
+
+
+        // Updating The Amount in Wallet
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                .put("/wallet/add-balance/8888888888")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                .content(jsonBody)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertNotNull(result);
     }
 }

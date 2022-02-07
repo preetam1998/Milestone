@@ -35,7 +35,6 @@ public class WalletController {
 
 		// Create Wallet
 		UserWallet userWallet = this.wService.createWallet(wallet);
-		System.out.println(wallet);
 
 		//Create Response
 		Response response = new Response();

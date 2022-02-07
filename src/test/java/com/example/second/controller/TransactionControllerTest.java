@@ -1,34 +1,33 @@
 package com.example.second.controller;
 
-import com.example.second.dto.TransactionRequestDto;
-import com.example.second.enums.TransactionStatus;
-import com.example.second.models.Transaction;
+import com.example.second.dto.JwtRequest;
 import com.example.second.service.TransactionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@AutoConfigureWebMvc
 @AutoConfigureMockMvc
-@WebMvcTest(TransactionController.class)
+@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class TransactionControllerTest {
 
-    @MockBean
+    @Autowired
     TransactionService transactionService;
 
     @Autowired
@@ -37,45 +36,56 @@ class TransactionControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
-    // Request Dto for transaction
-    TransactionRequestDto transactionRequestDto1 = new TransactionRequestDto("111111111111", "4444444444", 200000.0);
-    TransactionRequestDto transactionRequestDto2 = new TransactionRequestDto("4444444444", "6666666666", 60000.0);
-    TransactionRequestDto transactionRequestDto3 = new TransactionRequestDto("9685532139", "4444444444", 550000.0);
-
-    // Response Dto for transaction
-    Transaction transaction1 = new Transaction(1, 200000.0,TransactionStatus.SUCCESS,    "111111111111", "4444444444" );
-    Transaction transaction2 = new Transaction(2, 60000.0, TransactionStatus.SUCCESS,  "4444444444", "6666666666");
-    Transaction transaction3 = new Transaction(3, 550000.0, TransactionStatus.SUCCESS,  "9685532139", "4444444444");
+    public String doLogin() throws Exception {
+        String username = "aman0008";
+        JwtRequest user = new JwtRequest(username, "Sen@123");
+        String requestJSON = objectMapper.writeValueAsString(user);
 
 
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/authenticate")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(requestJSON))
+                .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+
+        String response = result.getResponse().getContentAsString();
+        assertNotNull(response);
+        System.out.println(response );
+        String getResponse = response.toString();
+        String token = getResponse.substring(7);
+        return token;
+    }
 
     @Test
     void sendMoney() throws Exception {
 
-        Mockito.when(transactionService.sendMoney(transactionRequestDto2.getPayerMobile(), transactionRequestDto2.getPayeeMobile(),
-                transactionRequestDto2.getAmount())).thenReturn(transaction2);
 
-        mockMvc.perform(MockMvcRequestBuilders
-                .post("/transaction/transfer")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk()
-        );
+        // Get Token for Authentication
+        String token = doLogin();
 
 
+        // Fetch Body For Transaction
+        String path = "src/test/jsonFile/transaferMoney.json";
+        String jsonBody = new String(Files.readAllBytes(Paths.get(path)));
+
+        // Perform
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/transaction/transfer")
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                        .content(jsonBody)
+                        .contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isOk()).andReturn();
     }
 
     @Test
     void getTransactionHistory() throws Exception {
-        List<Transaction> transactions = new ArrayList<>(Arrays.asList(transaction1,transaction2,transaction3));
 
-        Mockito.when(transactionService.getTransactionHistory("4444444444")).thenReturn(transactions);
+        // Get Token for Authentication
+        String token = doLogin();
 
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/transaction/transaction-history/44444444444")
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
                 .andExpect(status().isOk()
                 );
 

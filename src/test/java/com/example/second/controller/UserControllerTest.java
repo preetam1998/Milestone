@@ -1,26 +1,32 @@
 package com.example.second.controller;
 
-import com.example.second.models.User;
-import com.example.second.models.UserSideResponse;
+import com.example.second.dto.JwtRequest;
 import com.example.second.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.Arrays;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
+@AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class UserControllerTest {
 
     @Autowired
@@ -29,91 +35,101 @@ class UserControllerTest {
     @Mock
     private UserService userService;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @InjectMocks
     private UserController userController;
 
-    User u1 = new User(1,"preetam12","preetam","patel", "pre19", "9898989898", "preetam@g.c", "asdjnakca", "bdjhabd",true, "USER");
-    User u2 = new User(2,"shiv01","shivam","patel", "pre19", "8898989898", "shiv@g.c", "asdjnakca", "bdjhabd",true, "USER");
-    User u3 = new User(3,"nishu12","nishant","patel", "pre19", "9998989898", "nish@g.c", "asdjnakca", "bdjhabd",true, "USER");
+
+    public String getToken() throws Exception {
+        String username = "aman0008";
+        JwtRequest user = new JwtRequest(username, "Sen@123");
+        String requestJSON = objectMapper.writeValueAsString(user);
 
 
-    @Test
-    void getAllUser() throws Exception {
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/authenticate")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(requestJSON))
+                .andExpect(status().isOk()).andReturn();
 
-        List<User> users = Arrays.asList(u1, u2, u3);
-
-        Mockito.when(userService.getAllUser()).thenReturn(users);
-
-        mockMvc.perform(MockMvcRequestBuilders
-                        .get("/user/all")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
+        String response = result.getResponse().getContentAsString();
+        assertNotNull(response);
+        System.out.println(response );
+        String getResponse = response.toString();
+        String token = getResponse.substring(7);
+        return token;
     }
+
+
+
 
     @Test
     void getUser() throws Exception {
-        User u1 = new User(1,"preetam12","preetam","patel", "pre19", "9898989898", "preetam@g.c", "asdjnakca", "bdjhabd",true, "USER");
-        String mobile  = "9898989898";
 
-        Mockito.when(userService.getSpecificUser(mobile)).thenReturn(u1);
-
-        mockMvc.perform(MockMvcRequestBuilders
+        // Get Token
+        String token = getToken();
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                         .get("/user/9898989898")
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isOk()).andReturn();
     }
 
     @Test
     void createUser() throws Exception {
-        UserSideResponse userSideResponse = new UserSideResponse("preetam12", "preetam", "aptel", "pre19", "9898989898", "preetam@g.c", "asdjnakca", "bdjhabd");
-        User u1 = new User(1,"preetam12","preetam","patel", "pre19", "9898989898", "preetam@g.c", "asdjnakca", "bdjhabd",true, "USER");
 
-        Mockito.when(userService.addNewUser(userSideResponse)).thenReturn(u1);
+        // Get Token
+        String token = getToken();
+
+        // Get Body For request
+        String path = "src/test/jsonFile/Create_User.json";
+        String requestBody =  new String(Files.readAllBytes(Paths.get(path)));
 
 
-        mockMvc.perform(MockMvcRequestBuilders
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                         .post("/user/addNewUser")
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                        .content(requestBody)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isCreated()
-                );
+                .andExpect(status().isOk()).andReturn();
+
     }
 
     @Test
     void updateUser() throws Exception {
 
-        UserSideResponse userSideResponse = new UserSideResponse("preetam1212", "preetam", "aptel", "pre19", "9898989898", "preetam@g.c", "asdjnakca", "bdjhabd");
+        // Get Token
+        String token = getToken();
 
-        User u1 = new User(1,"preetam12","preetam","patel", "pre19", "9898989898", "preetam@g.c", "asdjnakca", "bdjhabd",true, "USER");
-
-        User u2 = new User(1,"preetam1212","preetam","patel", "pre19", "9898989898", "preetam@g.c", "asdjnakca", "bdjhabd",true, "USER");
-
-        Mockito.when(userService.updateUser("preetam12", userSideResponse)).thenReturn(u2);
+        // Get Body For request
+        String path = "src/test/jsonFile/Create_User.json";
+        String requestBody =  new String(Files.readAllBytes(Paths.get(path)));
 
 
-        mockMvc.perform(MockMvcRequestBuilders
-                        .post("/user/preetam12")
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                        .put("/user/kapil1111")
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                        .content(requestBody)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk()
-                );
+                .andExpect(status().isOk()).andReturn();
     }
 
     @Test
     void deleteUser() throws Exception {
 
-        User u1 = new User(1,"preetam12","preetam","patel", "pre19", "9898989898", "preetam@g.c", "asdjnakca", "bdjhabd",true, "USER");
 
-        Mockito.when(userService.deleteUser(u1.getMobileNumber())).thenReturn(true);
-
+        // Get Token
+        String token = getToken();
+        
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/user/9898989898")
+                        .delete("/user/9999999999")
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk()
-                );
+                        .andExpect(status().isOk()
+                    );
 
     }
+
+
 }
