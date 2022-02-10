@@ -120,10 +120,10 @@ class CrudControllerTest {
         User user = User.builder()
                 .id(1)
                 .userName("Sweta1999")
-                .firstName("Sweta")
-                .lastName("Singh")
+                .firstName("shewta")
+                .lastName("Punjabi")
                 .email("sweta@gmail.com")
-                .mobile("7879030334")
+                .mobile("8989898989")
                 .currentAddress("SBI Chawk")
                 .permanentAddress("Madan Mahal").build();
 
