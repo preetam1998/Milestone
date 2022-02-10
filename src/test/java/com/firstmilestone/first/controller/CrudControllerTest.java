@@ -28,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @WebMvcTest(CrudController.class)
+
 class CrudControllerTest {
 
 
@@ -80,10 +81,10 @@ class CrudControllerTest {
 
         User user = User.builder()
                 .userName("Sweta1999")
-                .firstName("Sweta")
-                .lastName("Singh")
+                .firstName("Shweta")
+                .lastName("punjabi")
                 .email("sweta@gmail.com")
-                .mobile("7879030334")
+                .mobile("8989898989")
                 .currentAddress("SBI Chawk")
                 .permanentAddress("Madan Mahal").build();
 
@@ -91,9 +92,9 @@ class CrudControllerTest {
                 .id(1)
                 .userName("Sweta1999")
                 .firstName("Sweta")
-                .lastName("Singh")
+                .lastName("punjabi")
                 .email("sweta@gmail.com")
-                .mobile("7879030334")
+                .mobile("8989898989")
                 .currentAddress("SBI Chawk")
                 .permanentAddress("Madan Mahal").build();
 
