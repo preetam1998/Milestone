@@ -51,7 +51,7 @@ class CrudServiceTest {
     @Test
     void getSpecificUser() {
 
-        User user = new User(1,"Vivek0099", "Vivek", "Patel", "vivek.patel@paytm.com","8765432178","Pune", "Gwalior");
+        User user = new User(1,"Vivek0099", "Vivek", "Patel", "vivek.patel@test.com","8765432178","Pune", "Gwalior");
 
         String username = "Vivek0099";
 
@@ -61,9 +61,9 @@ class CrudServiceTest {
 
     @Test
     void addNewUser() {
-        User user = new User("Vivek0099", "Vivek", "Patel", "vivek.patel@paytm.com","9800083498","Pune", "Gwalior");
+        User user = new User("Vivek0099", "Vivek", "Patel", "vivek.patel@test.com","9800083498","Pune", "Gwalior");
 
-        User user1 = new User(1,"Vivek0099", "Vivek", "Patel", "vivek.patel@paytm.com","9800083498","Pune", "Gwalior");
+        User user1 = new User(1,"Vivek0099", "Vivek", "Patel", "vivek.patel@test.com","9800083498","Pune", "Gwalior");
 
         // Providing Knowledge
         when(crudRepository.save(user)).thenReturn(user1);
