@@ -83,7 +83,7 @@ class CrudControllerTest {
                 .userName("Sweta1999")
                 .firstName("Shweta")
                 .lastName("punjabi")
-                .email("sweta@gmail.com")
+                .email("sweta@g.c")
                 .mobile("8989898989")
                 .currentAddress("SBI Chawk")
                 .permanentAddress("Madan Mahal").build();
@@ -93,7 +93,7 @@ class CrudControllerTest {
                 .userName("Sweta1999")
                 .firstName("Sweta")
                 .lastName("punjabi")
-                .email("sweta@gmail.com")
+                .email("sweta@g.c")
                 .mobile("8989898989")
                 .currentAddress("SBI Chawk")
                 .permanentAddress("Madan Mahal").build();
@@ -122,7 +122,7 @@ class CrudControllerTest {
                 .userName("Sweta1999")
                 .firstName("shewta")
                 .lastName("Punjabi")
-                .email("sweta@gmail.com")
+                .email("sweta@g.c")
                 .mobile("8989898989")
                 .currentAddress("SBI Chawk")
                 .permanentAddress("Madan Mahal").build();
