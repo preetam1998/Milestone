@@ -1,10 +1,11 @@
 package com.example.second.token;
 
 
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,9 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtil {
+
+    // Get Logger for class
+    private static Logger logger = LogManager.getLogger(JwtUtil.class);
 
     private String SECRET_KEY = "milestone";
 
@@ -40,6 +44,7 @@ public class JwtUtil {
     }
 
     public String generateToken(UserDetails userDetails) {
+        logger.info("JwtUtil : Generating Token For User ");
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userDetails.getUsername());
     }

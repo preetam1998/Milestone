@@ -6,7 +6,7 @@
     "lastName" : "patel",
     "password" : "preetam1998",
     "mobileNumber" : "9685532139",
-    "email" : "preet.patel@paytmbank.com",
+    "email" : "preet.patel@bank.com",
    "cAddress":"Nehru  Nagar, Bhopal",
     "pAddress" : "Gwari Ghat, Bhopal"
 }
@@ -19,7 +19,7 @@
     "lastName" : "Patel",
     "password" : "raj1000",
     "mobileNumber" : "2222222222",
-    "email" : "roshni.raj@paytmbank.com"
+    "email" : "roshni.raj@bank.com"
     "cAddress":"Nehru  Nagar, Bhopal",
     "pAddress" : "Gwari Ghat, Bhopal"
 }
@@ -32,7 +32,7 @@
     "lastName" : "kumar",
     "password" : "mukesh1111",
     "mobileNumber" : "3333333333",
-    "email" : "mukesh.kumar@paytmbank.com"
+    "email" : "mukesh.kumar@bank.com"
     "cAddress":"Nehru  Nagar, Bhopal",
     "pAddress" : "Gwari Ghat, Bhopal"
 }
@@ -46,7 +46,7 @@
     "lastName" : "Aman",
     "password" : "ashu0001",
     "mobileNumber" : "4444444444",
-    "email" : "ashu.aman@paytmbank.com",
+    "email" : "ashu.aman@bank.com",
     "cAddress":"Nehru  Nagar, Bhopal",
     "pAddress" : "Gwari Ghat, Bhopal"
 }
@@ -59,7 +59,7 @@
     "lastName" : "Singh",
     "password" : "suraj0001",
     "mobileNumber" : "5555555555",
-    "email" : "suraj.singh@paytmbank.com"
+    "email" : "suraj.singh@bank.com"
     "cAddress":"Nehru  Nagar, Bhopal",
     "pAddress" : "Gwari Ghat, Bhopal"
 }
@@ -71,7 +71,7 @@
     "lastName" : "Singh",
     "password" : "shiv@123",
     "mobileNumber" : "66666666666",
-    "email" : "shivam.singh@paytmbank.com",
+    "email" : "shivam.singh@bank.com",
     "cAddress":"Vijay Nagar, Jabalpur",
     "pAddress" : "Akash Vhar, Bhopal"
 }
