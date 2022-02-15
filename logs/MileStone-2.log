@@ -1,0 +1,20 @@
+2022-02-15 10:19:57.429  INFO PPBNOMBPBT-237.local --- [  restartedMain] c.e.s.SecondApplication                  : Starting SecondApplication using Java 1.8.0_231 on PPBNOMBPBT-237.local with PID 57672 (/Users/preetam.patel/Documents/MileStone/second/target/classes started by preetam.patel in /Users/preetam.patel/Documents/MileStone/second)
+2022-02-15 10:19:57.435 DEBUG PPBNOMBPBT-237.local --- [  restartedMain] c.e.s.SecondApplication                  : Running with Spring Boot v2.6.3, Spring v5.3.15
+2022-02-15 10:19:57.435  INFO PPBNOMBPBT-237.local --- [  restartedMain] c.e.s.SecondApplication                  : No active profile set, falling back to default profiles: default
+2022-02-15 10:20:00.394 DEBUG PPBNOMBPBT-237.local --- [  restartedMain] c.e.s.f.JwtAuthenticationFilter          : Filter 'jwtAuthenticationFilter' configured for use
+2022-02-15 10:20:01.273  INFO PPBNOMBPBT-237.local --- [  restartedMain] c.e.s.SecondApplication                  : Started SecondApplication in 4.186 seconds (JVM running for 5.39)
+2022-02-15 10:20:01.277 DEBUG PPBNOMBPBT-237.local --- [  restartedMain] c.e.s.SecondApplication                  : Debugging log
+2022-02-15 10:20:01.277  INFO PPBNOMBPBT-237.local --- [  restartedMain] c.e.s.SecondApplication                  : Info log
+2022-02-15 10:20:01.277  WARN PPBNOMBPBT-237.local --- [  restartedMain] c.e.s.SecondApplication                  : Hey, This is a warning!
+2022-02-15 10:20:01.277 ERROR PPBNOMBPBT-237.local --- [  restartedMain] c.e.s.SecondApplication                  : Oops! We have an Error. OK
+2022-02-15 10:20:01.278 FATAL PPBNOMBPBT-237.local --- [  restartedMain] c.e.s.SecondApplication                  : Damn! Fatal error. Please fix me.
+2022-02-15 10:20:15.250  INFO PPBNOMBPBT-237.local --- [nio-9090-exec-2] c.e.s.c.JwtController                    : Authorization Request Received From Username : suraj0005, Password : suraj0001
+2022-02-15 10:20:15.251  WARN PPBNOMBPBT-237.local --- [nio-9090-exec-2] c.e.s.c.JwtController                    : Authenticating user !!!!!!!
+2022-02-15 10:20:15.255  INFO PPBNOMBPBT-237.local --- [nio-9090-exec-2] c.e.s.s.CustomUserDetailsService         : CustomUserDetailsService : Verifying User : suraj0005
+2022-02-15 10:20:15.255  WARN PPBNOMBPBT-237.local --- [nio-9090-exec-2] c.e.s.s.CustomUserDetailsService         : CustomUserDetailsService : Searching user in Database
+2022-02-15 10:20:15.345 DEBUG PPBNOMBPBT-237.local --- [nio-9090-exec-2] c.e.s.s.CustomUserDetailsService         : CustomUserDetailsService : User is present in Database
+2022-02-15 10:20:15.350  INFO PPBNOMBPBT-237.local --- [nio-9090-exec-2] c.e.s.s.CustomUserDetailsService         : CustomUserDetailsService : Verifying User : suraj0005
+2022-02-15 10:20:15.350  WARN PPBNOMBPBT-237.local --- [nio-9090-exec-2] c.e.s.s.CustomUserDetailsService         : CustomUserDetailsService : Searching user in Database
+2022-02-15 10:20:15.352 DEBUG PPBNOMBPBT-237.local --- [nio-9090-exec-2] c.e.s.s.CustomUserDetailsService         : CustomUserDetailsService : User is present in Database
+2022-02-15 10:20:15.353  INFO PPBNOMBPBT-237.local --- [nio-9090-exec-2] c.e.s.t.JwtUtil                          : JwtUtil : Generating Token For User 
+2022-02-15 10:20:15.382 DEBUG PPBNOMBPBT-237.local --- [nio-9090-exec-2] c.e.s.c.JwtController                    : Token : eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXJhajAwMDUiLCJleHAiOjE2NDQ5MzY2MTUsImlhdCI6MTY0NDkwMDYxNX0.tHnzZQeof6vxmIq889pezegK-yYP8-_rnqxvjgCknx8
