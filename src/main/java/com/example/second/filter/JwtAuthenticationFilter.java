@@ -3,6 +3,8 @@ package com.example.second.filter;
 
 
 import com.example.second.token.JwtUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,27 +29,50 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtil jwtUtil;
 
+    // Get Logger for the class
+    private static final Logger logger = LogManager.getLogger(JwtAuthenticationFilter.class);
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        final String authHeader = request.getHeader("Authorization");
+        logger.info("Filter : Filtering The Request");
+        logger.warn("Filter : Getting Authorization Token From Authorization : 'Bearer Token' ");
 
-        String userName = null;
+        final String authHeader = request.getHeader("Authorization");
+        String userThatRequestingApi = request.getParameter("userName");
+        String userNameFetchedFromToken = null;
         String jwt = null;
+
+
+        logger.info("Filter : Token :: " + authHeader);
+        logger.info("Filter : User Requesting API Call : " + userThatRequestingApi);
+
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             jwt = authHeader.substring(7);
-            userName = jwtUtil.extractUsername(jwt);
-            System.out.println(userName);
+            userNameFetchedFromToken = jwtUtil.extractUsername(jwt);
+            logger.info("Filter : Username Fetched From Token ::  " + userNameFetchedFromToken);
         }
 
-        if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
-            if (jwtUtil.validateToken(jwt, userDetails)) {
-                UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(token);
+
+        if (userNameFetchedFromToken != null && SecurityContextHolder.getContext().getAuthentication() == null ) {
+            logger.info(" User fetched from both API and Token");
+            UserDetails userDetails = userDetailsService.loadUserByUsername(userNameFetchedFromToken);
+
+            if(userNameFetchedFromToken.equalsIgnoreCase(userThatRequestingApi)) {
+                if (jwtUtil.validateToken(jwt, userDetails)) {
+                    logger.info(" Validating User");
+                    UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(token);
+                }
             }
+            else
+                {
+                    logger.info("User whose token used :: " + userNameFetchedFromToken );
+                    logger.info("User who request Api call :: " + userThatRequestingApi);
+                    logger.warn(userThatRequestingApi + " is trying to attack .");
+                }
         }
 
         filterChain.doFilter(request, response);

@@ -22,21 +22,21 @@ public class WalletController {
 	private static Logger logger = LogManager.getLogger(WalletController.class);
 
 
-	@GetMapping("/fetch-wallet/{mobile}")
-	public Response getWallet( @PathVariable String mobile) throws Exception
+	@GetMapping("/fetch-wallet")
+	public Response getWallet( @RequestParam String mobileNumber) throws Exception
 	{
 
 		logger.info("Controller : API for fetching wallet reached to Controller");
-		logger.warn("Controller : Fetching wallet ith mobile number : " + mobile);
+		logger.warn("Controller : Fetching wallet ith mobile number : " + mobileNumber);
 		// check Total Balance on Wallet
-		UserWallet wallet =  this.wService.getWallet(mobile);
+		UserWallet wallet =  this.wService.getWallet(mobileNumber);
 
 
 		//Create Response
 		Response response = new Response();
 		response.setStatus(HttpStatus.OK);
 		response.setMessage("Fetching  Wallet ");
-		response.setData("Mobile : " + mobile + ", Amount : " + wallet.getAmount());
+		response.setData("Mobile : " + mobileNumber + ", Amount : " + wallet.getAmount());
 		logger.debug("Controller :  Information  : " + response.getData());
 		return response;
 	}
@@ -60,13 +60,13 @@ public class WalletController {
 		return response;
 	}
 	
-	@PutMapping("/add-balance/{mobile}")
-	public Response addAmtToWallet(@PathVariable String mobile, @RequestBody WalletRequestDto walletRequest) throws Exception
+	@PutMapping("/add-balance/")
+	public Response addAmtToWallet(@RequestParam String mobileNumber, @RequestBody WalletRequestDto walletRequest) throws Exception
 	{
-		logger.info("Controller : API for adding balance to  wallet with mobile number : " + mobile);
-		logger.warn("Controller : Adding  amount : " + walletRequest.getAmount()  +"rs  to wallet with mobile number : " + mobile);
+		logger.info("Controller : API for adding balance to  wallet with mobile number : " + mobileNumber);
+		logger.warn("Controller : Adding  amount : " + walletRequest.getAmount()  +"rs  to wallet with mobile number : " + mobileNumber);
 
-		boolean flag = this.wService.addMoneyToWallet(mobile, walletRequest.getAmount());
+		boolean flag = this.wService.addMoneyToWallet(mobileNumber, walletRequest.getAmount());
 
 
 		//Create Response

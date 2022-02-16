@@ -22,7 +22,7 @@ public class UserController {
 	// Get Logger for the Class
 	private static Logger logger  = LogManager.getLogger(UserController.class);
 
-	@GetMapping("/all")
+	@GetMapping("/getAllUser")
 	public Response getAllUser()
 	{
 		logger.info("Controller : API Call For Fetching All User Received By Controller.");
@@ -50,8 +50,8 @@ public class UserController {
 		return response;
 	}
 	
-	@GetMapping("/{mobileNumber}")
-	public Response getUser(@PathVariable String mobileNumber )
+	@GetMapping("/getUser")
+	public Response getUser(@RequestParam String mobileNumber )
 	{
 		logger.info("Controller : API Call For Getting Specific User Reached to Controller");
 		logger.warn("Controller : Fetch User with mobile number : " + mobileNumber );
@@ -78,7 +78,6 @@ public class UserController {
 		return response;
 	}
 
-	
 	@PostMapping("/addNewUser")
 	public Response createUser(@RequestBody UserSideResponse user)
 	{
@@ -138,7 +137,7 @@ public class UserController {
 	}
 	
 	
-	@DeleteMapping("/{mobileNumber}")
+	@DeleteMapping("?{userName}&{mobileNumber}")
 	public Response deleteUser(@PathVariable String mobileNumber)
 	{
 		logger.info("Controller : API Call For Deleting Specific User Reached to Controller");

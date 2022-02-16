@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("transaction")
+@RequestMapping("/transaction")
 public class TransactionController {
 	
 	
@@ -24,7 +24,7 @@ public class TransactionController {
 
 
 	@PostMapping("/transfer")
-	public Response sendMoney(@RequestBody TransactionRequestDto transaction)
+	public Response sendMoney(@RequestBody TransactionRequestDto transaction, @RequestParam String userName)
 	{
 		logger.info("Controller : API call for Transaction Received by Controller");
 		logger.warn("Controller : Transaction :::" + transaction.toString());
@@ -40,8 +40,8 @@ public class TransactionController {
 	}
 
 
-	@GetMapping("/transaction-history/{mobileNumber}")
-	public Response getTransactionHistory(@PathVariable String mobileNumber)
+	@GetMapping("/transaction-history")
+	public Response getTransactionHistory(@RequestParam String mobileNumber)
 	{
 		logger.info("Controller : API call for Transaction Received by Controller");
 		logger.warn("Controller : History Fetched  !!!");

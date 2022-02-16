@@ -36,7 +36,7 @@ public class JwtController {
     public @ResponseBody String createAuthenticationToken(@RequestBody JwtRequest requestDto)
     {
 
-        logger.info("Authorization Request Received From Username : " + requestDto.getUsername() + ", Password : " + requestDto.getPassword());
+        logger.info("Authorization Request Received From Username : " + requestDto.getUserName() + ", Password : " + requestDto.getPassword());
 
 
         // Create Response
@@ -45,7 +45,7 @@ public class JwtController {
         try{
             logger.warn("Authenticating user !!!!!!!");
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(requestDto.getUsername(), requestDto.getPassword())
+                    new UsernamePasswordAuthenticationToken(requestDto.getUserName(), requestDto.getPassword())
 
 
             );
@@ -58,7 +58,7 @@ public class JwtController {
             return response.getData();
         }
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(requestDto.getUsername());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(requestDto.getUserName());
         String jwtToken = jwtUtil.generateToken(userDetails);
 
         logger.debug("Token : " + jwtToken);
