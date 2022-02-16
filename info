@@ -1,15 +1,3 @@
-<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		
-		
-		
-		
-		
-		
-		
-		
 
 #milestone Configuration
 spring.jpa.hibernate.ddl-auto = update
@@ -20,11 +8,11 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL57Dialect
 
 
 {
-    "username" : "shiv00",
+    "username" : "shiv0001",
     "firstname" : "shivam",
     "lastname" : "pal",
-    "email" : "shival.pal@paytmbank.com",
-    "mobile" : "1234123412",
+    "email" : "shival.pal@g.com",
+    "mobile" : "1111111111",
     "address1" : "rewa",
     "address2" : "katni"
 }
@@ -32,45 +20,34 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL57Dialect
 
 
 {
-    "username" : "krish000",
+    "username" : "krish0002",
     "firstname" : "krishna",
     "lastname" : "nag",
-    "email" : "krishna.nag@paytmbank.com",
-    "mobile" : "1236666412",
+    "email" : "krishna.nag@g.com",
+    "mobile" : "2222222222",
     "address1" : "sidhi",
     "address2" : "churhat"
 }
 
 
 {
-    "username" : "preet1998",
+    "username" : "preet0003",
     "firstname" : "preetam",
     "lastname" : "patel",
-    "email" : "preetam.patel@paytmbank.com",
-    "mobile" : "9685333139",
+    "email" : "preetam.patel@g.com",
+    "mobile" : "3333333333",
     "address1" : "satna",
     "address2" : "bhind"
 }
 
 
 {
-    "username" : "rosh12",
+    "username" : "rosh0004",
     "firstname" : "roshni",
     "lastname" : "patel",
-    "email" : "roshni.patel@paytmbank.com",
-    "mobile" : "1239393512",
+    "email" : "roshni.patel@g.com",
+    "mobile" : "4444444444",
     "address1" : "chennai",
     "address2" : "goa"
 }
 
-
-
-{
-    "username" : "rosh1",
-    "firstname" : "roshni",
-    "lastname" : "patel",
-    "email" : "roshni1.patel@paytmbank.com",
-    "mobile" : "1239300512",
-    "address1" : "chennai",
-    "address2" : "goa"
-}
