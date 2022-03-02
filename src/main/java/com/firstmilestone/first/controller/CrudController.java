@@ -27,8 +27,8 @@ public class CrudController {
 	public Response getAllUser()
 	{
 
-		logger.info("Controller :  Received API call for fetching all user.");
-		logger.warn("Controller :  providing service to call");
+		logger.info("Controller :  Received API call for Fetching all user.");
+//		logger.warn("Controller :  providing service to call");
 		// Fetching All Users from System
 		Iterable<User> list = crudService.getAllUser();
 
@@ -36,8 +36,6 @@ public class CrudController {
 		Response res = new Response();
 		res.setStatus(HttpStatus.OK);
 		res.setJob("Fetching All Users");
-
-
 
 		if(list != null)
 		{
@@ -56,8 +54,8 @@ public class CrudController {
 	public Response getSpecificUser(@PathVariable String username)
 	{
 
-		logger.info("Controller :  Received API call for fetching all user.");
-		logger.warn("Controller :  providing service to call");
+		logger.info("Controller :  Received API call for fetching specific user.");
+		//logger.warn("Controller :  providing service to call");
 
 
 		// Fetching Specific User from System
@@ -85,8 +83,8 @@ public class CrudController {
 	@PostMapping()
 	public Response  addNewUser(@RequestBody User newUser)
 	{
-		logger.info("Controller :  Received API call for fetching all user.");
-		logger.warn("Controller :  providing service to call");
+		logger.info("Controller :  Received API call for adding new user.");
+		//logger.warn("Controller :  providing service to call");
 
 		// Adding new user to system
 		User user  = this.crudService.addNewUser(newUser);
@@ -115,8 +113,8 @@ public class CrudController {
 	public Response updateUser(@RequestBody User updateUser,@PathVariable String username)
 	{
 
-		logger.info("Controller :  Received API call for fetching all user.");
-		logger.warn("Controller :  providing service to call");
+		logger.info("Controller :  Received API call for updating user.");
+		//logger.warn("Controller :  providing service to call");
 
 		// Updating  the  user
 		User user  = this.crudService.updateUserDetail(updateUser, username);
@@ -144,15 +142,15 @@ public class CrudController {
 	public Response deleteUser(@PathVariable String username )
 	{
 
-		logger.info("Controller :  Received API call for fetching all user.");
-		logger.warn("Controller :  providing service to call");
+		logger.info("Controller :  Received API call for delete user.");
+		//logger.warn("Controller :  providing service to call");
 
 		//Deleting the User by its username
 		boolean flag = crudService.deleteUser(username);
 
 		//Create Response
 		Response res = new Response();
-		res.setJob("Deleting  User With Username");
+		res.setJob("Deleting  User With Username : " + username);
 		if(flag)
 		{
 			res.setStatus(HttpStatus.OK);

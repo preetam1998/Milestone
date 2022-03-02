@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String userName;
 	private String firstName;

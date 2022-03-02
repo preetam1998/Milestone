@@ -17,21 +17,20 @@ import java.util.List;
 @Service
 @Transactional
 public class CrudService {
-	
-	@Autowired
+
 	public CrudRepository crudRepository;
 
-	@Autowired
-	private ValidateMobEml validateMobEml;
+
+	public ValidateMobEml validateMobEml;
 
 	// Get Logger for this class.
 	private static Logger logger = LogManager.getLogger(CrudController.class);
 
 
-	public CrudService(CrudRepository crudRepository)
+	public CrudService(CrudRepository crudRepository, ValidateMobEml validateMobEml)
 	{
-
 		this.crudRepository = crudRepository;
+		this.validateMobEml = validateMobEml;
 	}
 
 	//  Service : Get All User From System
@@ -62,11 +61,10 @@ public class CrudService {
 	//  Service : Add New User To System
 	public User addNewUser(User user)
 	{
-		logger.info("Service : Adding New  User");
+		logger.info("Service : Adding New  User = " + user);
 		logger.debug("Service :  Validating user details");
 		boolean flag = validateMobEml.validateUser(user);
 
-		logger.info("Service Adding User to Database");
 		return crudRepository.save(user);
 
 	}
@@ -75,7 +73,7 @@ public class CrudService {
 	//  Service : Update User Details On System
 	public User updateUserDetail(User newUser, String username)
 	{
-		logger.info("Service : Adding New  User");
+		logger.info("Service : updating  User");
 
 
 		logger.debug("Service :  Find user in database");

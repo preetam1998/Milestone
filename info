@@ -8,46 +8,46 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL57Dialect
 
 
 {
-    "username" : "shiv0001",
-    "firstname" : "shivam",
-    "lastname" : "pal",
+    "userName" : "shiv0001",
+    "firstName" : "shivam",
+    "lastName" : "pal",
     "email" : "shival.pal@g.com",
     "mobile" : "1111111111",
-    "address1" : "rewa",
-    "address2" : "katni"
+    "currentAddress" : "rewa",
+    "permanentAddress" : "katni"
 }
 
 
 
 {
     "username" : "krish0002",
-    "firstname" : "krishna",
-    "lastname" : "nag",
+    "firstName" : "krishna",
+    "lastName" : "nag",
     "email" : "krishna.nag@g.com",
     "mobile" : "2222222222",
-    "address1" : "sidhi",
-    "address2" : "churhat"
+    "currentAddress" : "sidhi",
+    "permanentAddress" : "churhat"
 }
 
 
 {
     "username" : "preet0003",
-    "firstname" : "preetam",
-    "lastname" : "patel",
+    "firstName" : "preetam",
+    "lastName" : "patel",
     "email" : "preetam.patel@g.com",
     "mobile" : "3333333333",
-    "address1" : "satna",
-    "address2" : "bhind"
+    "currentAddress" : "satna",
+    "permanentAddress" : "bhind"
 }
 
 
 {
-    "username" : "rosh0004",
-    "firstname" : "roshni",
-    "lastname" : "patel",
+    "userName" : "rosh0004",
+    "firstName" : "roshni",
+    "lastName" : "patel",
     "email" : "roshni.patel@g.com",
     "mobile" : "4444444444",
-    "address1" : "chennai",
-    "address2" : "goa"
+    "currentAddress" : "chennai",
+    "permanentAddress" : "goa"
 }
 

@@ -2,52 +2,52 @@
 
 
 {
-    "userName" : "pradeep1010",
+    "userName" : "pradeep0001",
     "firstName" : "pradeep",
     "lastName" : "singh",
     "email" : "pradeep.singh@test.com",
-    "mobile" : "1223334444",
+    "mobile" : "1111111111",
     "currentAddress" : "jalandhar",
     "permanentAddress" : "shimla"
 }
 
 
 {
-    "userName" : "preetam9090",
+    "userName" : "preetam0002",
     "firstName" : "preetam",
     "lastName" : "patel",
     "email" : "preetam.patel@test.com",
-    "mobile" : "9685555869",
+    "mobile" : "2222222222",
     "currentAddress" : "jabalpur",
     "permanentAddress" : "bhopal"
 }
 
 {
-    "userName" : "simram0001",
+    "userName" : "simram0003",
     "firstName" : "simran",
     "lastName" : "patel",
     "email" : "simran.patel@test.com",
-    "mobile" : "7777744444",
+    "mobile" : "3333333333",
     "currentAddress" : "shimla",
     "permanentAddress" : "chennai"
 }
 
 {
-    "userName" : "aarya27",
+    "userName" : "aarya004",
     "firstName" : "aarya",
     "lastName" : "dubey",
     "email" : "aarya.dubey@test.com",
-    "mobile" : "7474747474",
+    "mobile" : "4444444444",
     "currentAddress" : "shimla",
     "permanentAddress" : "chennai"
 }
 
 {
-    "userName" : "simram0001",
+    "userName" : "simram0005",
     "firstName" : "simran",
     "lastName" : "patel",
     "email" : "simran.patel@test.com",
-    "mobile" : "7777744444",
+    "mobile" : "5555555555",
     "currentAddress" : "shimla",
     "permanentAddress" : "chennai"
 }
